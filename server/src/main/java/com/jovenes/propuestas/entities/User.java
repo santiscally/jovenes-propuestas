@@ -7,15 +7,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.hibernate.annotations.WhereJoinTable;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@Builder
+@SuperBuilder
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,7 +30,7 @@ public class User extends BaseEntity {
     @Column(length = 500)
     protected String biography;
 
-    @Column(nullable=false, length = 50)
+    @Column(nullable=false, length = 50, unique = true)
     protected String email;
 
     @Column(nullable=false, length = 50)
@@ -46,10 +48,6 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     protected List<Address> addresses;
 
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinTable(name = "user_rewards", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "rew_id"))
-    @Where(clause = "deleted is null")
-    @WhereJoinTable(clause = "deleted is null")
-    protected List<Reward> rewards;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Purchase> purchases;
 }

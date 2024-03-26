@@ -6,11 +6,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 @Data
-@Builder
+@SuperBuilder
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,10 +21,10 @@ import org.hibernate.annotations.Where;
 @AttributeOverride(name = "id", column = @Column(name = "que_id"))
 public class Question extends BaseEntity {
 
-    @Column(nullable=false, length = 50)
+    @Column(nullable=false, length = 500)
     private String question;
 
-    @Column(length = 100)
+    @Column(length = 4000)
     private String answer;
 
     @ManyToOne(fetch = FetchType.LAZY)

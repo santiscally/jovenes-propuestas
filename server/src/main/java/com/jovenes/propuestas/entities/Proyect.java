@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -13,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-@Builder
+@SuperBuilder
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -48,15 +49,15 @@ public class Proyect extends BaseEntity {
     @JoinColumn(name = "own_id", nullable = false)
     private Owner owner;
 
-    @OneToMany(mappedBy = "proyect", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "proyect", fetch = FetchType.LAZY)
     private List<Question> questions;
 
-    @OneToMany(mappedBy = "proyect", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "proyect", fetch = FetchType.LAZY)
     private List<Update> updates;
 
-    @OneToMany(mappedBy = "proyect", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "proyect", fetch = FetchType.LAZY)
     private List<Reward> rewards;
 
-    @OneToMany(mappedBy = "proyect", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "proyect", fetch = FetchType.LAZY)
     private List<FAQ> faqs;
 }

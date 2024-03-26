@@ -1,0 +1,14 @@
+package com.jovenes.propuestas.repositories.base;
+
+import com.jovenes.propuestas.entities.base.BaseEntity;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
+import java.util.List;
+
+public interface BaseRepository<T extends BaseEntity> extends JpaRepository<T, Integer>, JpaSpecificationExecutor<T> {
+
+    List<T> findAll(Specification<T> spec);
+
+}

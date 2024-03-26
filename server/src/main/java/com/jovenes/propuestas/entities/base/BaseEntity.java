@@ -1,13 +1,20 @@
 package com.jovenes.propuestas.entities.base;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Calendar;
 import java.util.Date;
 
 @Data
 @MappedSuperclass
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
 public abstract class BaseEntity {
 
     @Id
@@ -22,12 +29,13 @@ public abstract class BaseEntity {
     protected Integer createdByUser;
 
     @Column(name="created_time", nullable=false)
-    protected Date createdTime = new Date(Calendar.getInstance().getTimeInMillis());
+    protected Date createdTime;
 
     @Column(name="updated_user")
     protected Integer updatedByUser;
 
     @Column(name="updated_time")
     protected Date updatedTime;
+
 }
 

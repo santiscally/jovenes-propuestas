@@ -3,14 +3,17 @@ package com.jovenes.propuestas.entities;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import java.util.List;
 
 @Data
+@SuperBuilder
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,6 +25,6 @@ public class Owner extends User{
 
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-    protected List<Proyect> proyects;
+    private List<Proyect> proyects;
 
 }

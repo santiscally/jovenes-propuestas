@@ -6,11 +6,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 @Data
-@Builder
+@SuperBuilder
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -42,7 +43,7 @@ public class Address extends BaseEntity {
     @Column(nullable=false, length = 50)
     private String country;
 
-    @Column(nullable=false, length = 15)
+    @Column(nullable=false, length = 25)
     private String phone;
 
     @Column(length = 20)

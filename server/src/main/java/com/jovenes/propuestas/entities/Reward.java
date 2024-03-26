@@ -7,15 +7,18 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.hibernate.annotations.WhereJoinTable;
+import org.springframework.util.Assert;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Data
-@Builder
+@SuperBuilder
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,10 +28,7 @@ import java.util.List;
 @AttributeOverride(name = "id", column = @Column(name = "rew_id"))
 public class Reward extends BaseEntity {
 
-    @Column(name="delivery_date", nullable=false)
-    private Date deliveryDate;
-
-    @Column(nullable=false, length = 50)
+    @Column(nullable=false, length = 500)
     private String title;
 
     @Column(nullable=false, length = 4000)
@@ -37,13 +37,11 @@ public class Reward extends BaseEntity {
     @Column(nullable=false)
     private double price;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "rewards", fetch = FetchType.LAZY)
-    @WhereJoinTable(clause="deleted is null")
-    @Where(clause="deleted is null")
-    private List<User> users;
+    @OneToMany(mappedBy = "reward", cascade = CascadeType.ALL)
+    private List<Purchase> purchases;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pro_id", nullable = false)
     private Proyect proyect;
+
 }
