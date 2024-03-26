@@ -1,19 +1,14 @@
 package com.jovenes.propuestas.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.jovenes.propuestas.entities.base.BaseEntity;
+import com.jovenes.propuestas.base.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-import org.hibernate.annotations.WhereJoinTable;
-import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -42,12 +37,12 @@ public class User extends BaseEntity {
     @Column(name="last_name", nullable=false, length = 50)
     protected String lastName;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     protected List<Question> questions;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     protected List<Address> addresses;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Purchase> purchases;
 }

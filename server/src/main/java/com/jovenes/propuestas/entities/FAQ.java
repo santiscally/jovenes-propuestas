@@ -1,9 +1,8 @@
 package com.jovenes.propuestas.entities;
 
-import com.jovenes.propuestas.entities.base.BaseEntity;
+import com.jovenes.propuestas.base.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;

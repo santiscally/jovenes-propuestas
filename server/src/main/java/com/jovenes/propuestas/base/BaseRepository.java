@@ -1,6 +1,6 @@
-package com.jovenes.propuestas.repositories.base;
+package com.jovenes.propuestas.base;
 
-import com.jovenes.propuestas.entities.base.BaseEntity;
+import com.jovenes.propuestas.base.BaseEntity;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

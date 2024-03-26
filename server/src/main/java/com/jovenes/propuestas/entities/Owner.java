@@ -24,7 +24,7 @@ import java.util.List;
 public class Owner extends User{
 
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
     private List<Proyect> proyects;
 
 }

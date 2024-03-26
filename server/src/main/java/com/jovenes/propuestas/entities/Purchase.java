@@ -1,6 +1,6 @@
 package com.jovenes.propuestas.entities;
 
-import com.jovenes.propuestas.entities.base.BaseEntity;
+import com.jovenes.propuestas.base.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,12 +22,12 @@ import java.util.Date;
 @AttributeOverride(name = "id", column = @Column(name = "pur_id"))
 public class Purchase extends BaseEntity {
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
     User user;
 
-    @ManyToOne
-    @JoinColumn(name = "rew_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rew_id", nullable = false)
     Reward reward;
 
     @Column(nullable=false)

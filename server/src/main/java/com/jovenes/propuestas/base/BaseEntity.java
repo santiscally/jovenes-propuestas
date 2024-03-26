@@ -1,4 +1,4 @@
-package com.jovenes.propuestas.entities.base;
+package com.jovenes.propuestas.base;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.persistence.*;

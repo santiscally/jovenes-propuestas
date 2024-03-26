@@ -1,20 +1,14 @@
 package com.jovenes.propuestas.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.jovenes.propuestas.entities.base.BaseEntity;
+import com.jovenes.propuestas.base.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-import org.hibernate.annotations.WhereJoinTable;
-import org.springframework.util.Assert;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -37,7 +31,7 @@ public class Reward extends BaseEntity {
     @Column(nullable=false)
     private double price;
 
-    @OneToMany(mappedBy = "reward", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "reward", fetch = FetchType.LAZY)
     private List<Purchase> purchases;
 
     @ManyToOne(fetch = FetchType.LAZY)
