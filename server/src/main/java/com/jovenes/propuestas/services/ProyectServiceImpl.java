@@ -12,7 +12,7 @@ import org.springframework.data.domain.Pageable;
 public class ProyectServiceImpl implements ProyectService {
     @Autowired
     ProyectRepository proyectRepository;
-    @Override
+
     public Proyect findById(int id) {
         return this.proyectRepository.findById(id).isPresent() ? this.proyectRepository.findById(id).get(): null;
     }

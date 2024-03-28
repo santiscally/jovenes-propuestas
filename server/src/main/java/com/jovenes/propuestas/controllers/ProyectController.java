@@ -16,7 +16,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 @RestController
-@RequestMapping("/proyect")
+@RequestMapping("/api/proyect")
 public class ProyectController {
 
     private static final Logger logger = LoggerFactory.getLogger(ProyectController.class);

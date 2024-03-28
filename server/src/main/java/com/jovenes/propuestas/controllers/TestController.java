@@ -35,7 +35,7 @@ public class TestController {
     UpdateRepository updateRepository;
     @Autowired
     UserRepository userRepository;
-    @PostMapping("/setFakeData")
+    @PostMapping("/api/setFakeData")
     public void hello() {
         try{
             Faker faker = new Faker();

@@ -10,5 +10,4 @@ import java.util.List;
 public interface BaseRepository<T extends BaseEntity> extends JpaRepository<T, Integer>, JpaSpecificationExecutor<T> {
 
     List<T> findAll(Specification<T> spec);
-
 }
