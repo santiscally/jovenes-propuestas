@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 @Service
 public class ProyectServiceImpl implements ProyectService {
     @Autowired
@@ -17,7 +19,7 @@ public class ProyectServiceImpl implements ProyectService {
         return this.proyectRepository.findById(id).isPresent() ? this.proyectRepository.findById(id).get(): null;
     }
 
-    public Page<Proyect> getAllProyects(Pageable pageable) {
-        return this.proyectRepository.findAll(pageable);
+    public List<Proyect> getAllProyects() {
+        return this.proyectRepository.findAll();
     }
 }

@@ -27,6 +27,30 @@ public class DTOWrapper {
         return dto;
     }
 
+    public static <Y, U> List<U> getDtos(List<Y> objects, List<String> names, Class<U> dtoClass) throws IllegalAccessException, InstantiationException {
+        List<U> dtos = new ArrayList<>();
+        for(Y object: objects){
+            U dto = dtoClass.newInstance();
+
+            // Obtener todos los campos declarados en la clase Y (Proyect)
+            Field[] fields = getAllFields(object.getClass());
+
+            // Copiar los valores de los campos de la clase Y a los campos correspondientes en la clase U (ProyectDTO)
+            for (Field field : fields) {
+                if (names.contains(field.getName())) {
+                    // Si el campo está en la lista de campos solicitados
+                    field.setAccessible(true); // Permitir acceso a campos privados
+                    Field dtoField = findFieldInHierarchy(dtoClass, field.getName());
+                    dtoField.setAccessible(true); // Permitir acceso a campos privados
+                    dtoField.set(dto, field.get(object)); // Copiar el valor del campo de Proyect a ProyectDTO
+                }
+            }
+            dtos.add(dto);
+        }
+
+        return dtos;
+    }
+
     private static Field[] getAllFields(Class<?> clazz) {
         List<Field> fields = new ArrayList<>();
         while (clazz != null) {
