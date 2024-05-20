@@ -28,5 +28,5 @@ public class FAQ extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pro_id", nullable = false)
-    private Proyect proyect;
+    private Project project;
 }

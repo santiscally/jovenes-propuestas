@@ -9,6 +9,7 @@ import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -17,11 +18,11 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "proyects")
-@SQLDelete(sql="UPDATE proyects SET deleted = '1' WHERE id = ?")
+@Table(name = "projects")
+@SQLDelete(sql="UPDATE projects SET deleted = '1' WHERE id = ?")
 @Where(clause="deleted is null")
 @AttributeOverride(name = "id", column = @Column(name = "pro_id"))
-public class Proyect extends BaseEntity {
+public class Project extends BaseEntity {
 
     @Column(nullable=false, length = 50)
     private String title;
@@ -36,7 +37,7 @@ public class Proyect extends BaseEntity {
     private double goal;
 
     @Column(name="limit_date", nullable=false)
-    private Date limitDate;
+    private LocalDateTime limitDate;
 
     @Column(name="collected_funds", nullable=false)
     private double collectedFunds;
@@ -48,15 +49,15 @@ public class Proyect extends BaseEntity {
     @JoinColumn(name = "own_id", nullable = false)
     private Owner owner;
 
-    @OneToMany(mappedBy = "proyect", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
     private List<Question> questions;
 
-    @OneToMany(mappedBy = "proyect", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
     private List<Update> updates;
 
-    @OneToMany(mappedBy = "proyect", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
     private List<Reward> rewards;
 
-    @OneToMany(mappedBy = "proyect", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
     private List<FAQ> faqs;
 }

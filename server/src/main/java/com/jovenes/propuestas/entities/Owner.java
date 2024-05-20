@@ -2,7 +2,6 @@ package com.jovenes.propuestas.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +24,6 @@ public class Owner extends User{
 
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
-    private List<Proyect> proyects;
+    private List<Project> projects;
 
 }

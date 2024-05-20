@@ -5,10 +5,10 @@ import com.github.javafaker.Faker;
 import com.jovenes.propuestas.entities.*;
 import com.jovenes.propuestas.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -23,7 +23,7 @@ public class TestController {
     @Autowired
     FAQRepository faqRepository;
     @Autowired
-    ProyectRepository proyectRepository;
+    ProjectRepository projectRepository;
     @Autowired
     QuestionRepository questionRepository;
     @Autowired
@@ -49,10 +49,11 @@ public class TestController {
                     .email("santiscally@gmail.com")
                     .biography(faker.paragraph())
                     .firstName(faker.firstName())
+                    .username(faker.firstName())
                     .lastName(faker.lastName())
                     .password("password")
                     .createdByUser(Integer.valueOf(faker.numerify("5")))
-                    .createdTime(new Date(Calendar.getInstance().getTimeInMillis()))
+                    .createdTime(LocalDateTime.now())
                     .build();
             user = this.userRepository.save(user);
 
@@ -60,36 +61,37 @@ public class TestController {
                     .email("guidojtorres@gmail.com")
                     .biography(faker.paragraph())
                     .firstName(faker.firstName())
+                    .username(faker.firstName())
                     .lastName(faker.lastName())
                     .password("password")
                     .createdByUser(Integer.valueOf(faker.numerify("5")))
-                    .createdTime(new Date(Calendar.getInstance().getTimeInMillis()))
+                    .createdTime(LocalDateTime.now())
                     .build();
 
             owner = this.userRepository.save(owner);
 
-            Proyect proyect = Proyect.builder()
+            Project project = Project.builder()
                     .title("La nueva vida")
                     .subtitle(faker.sentence())
                     .description(faker.paragraph())
-                    .limitDate(new Date(Calendar.getInstance().getTimeInMillis()))
+                    .limitDate(LocalDateTime.now())
                     .category("Arte")
                     .collectedFunds(50000)
                     .goal(60000000)
                     .owner(owner)
                     .createdByUser(owner.getId())
-                    .createdTime(new Date(Calendar.getInstance().getTimeInMillis()))
+                    .createdTime(LocalDateTime.now())
                     .build();
 
-            proyect = this.proyectRepository.save(proyect);
+            project = this.projectRepository.save(project);
             // Generate 5 FAQ entities
             for (int i = 0; i < 5; i++) {
                 FAQ faq = FAQ.builder()
                         .question(faker.sentence())
                         .answer(faker.paragraph())
-                        .proyect(proyect)
+                        .project(project)
                         .createdByUser(owner.getId())
-                        .createdTime(new Date(Calendar.getInstance().getTimeInMillis()))
+                        .createdTime(LocalDateTime.now())
                         .build();
 
                 faqs.add(faq);
@@ -110,7 +112,7 @@ public class TestController {
                         .nickname(faker.firstName())
                         .user(user)
                         .createdByUser(user.getId())
-                        .createdTime(new Date(Calendar.getInstance().getTimeInMillis()))
+                        .createdTime(LocalDateTime.now())
                         .build();
 
                 addresses.add(address);
@@ -122,9 +124,9 @@ public class TestController {
                         .question(faker.sentence())
                         .answer(faker.paragraph())
                         .user(user)
-                        .proyect(proyect)
+                        .project(project)
                         .createdByUser(user.getId())
-                        .createdTime(new Date(Calendar.getInstance().getTimeInMillis()))
+                        .createdTime(LocalDateTime.now())
                         .build();
                 questions.add(question);
             }
@@ -135,18 +137,18 @@ public class TestController {
                         .title(faker.sentence())
                         .description(faker.paragraph())
                         .price(Double.parseDouble(faker.numerify("1")))
-                        .proyect(proyect)
+                        .project(project)
                         .createdByUser(owner.getId())
-                        .createdTime(new Date(Calendar.getInstance().getTimeInMillis()))
+                        .createdTime(LocalDateTime.now())
                         .build();
                 reward = this.rewardRepository.save(reward);
                 Purchase purchase = Purchase.builder()
                         .user(user)
                         .reward(reward)
                         .quantity(2)
-                        .deliveryDate(new Date(Calendar.getInstance().getTimeInMillis()))
+                        .deliveryDate(LocalDateTime.now())
                         .createdByUser(user.getId())
-                        .createdTime(new Date(Calendar.getInstance().getTimeInMillis()))
+                        .createdTime(LocalDateTime.now())
                         .build();
 
                 this.purchaseRepository.save(purchase);
@@ -157,9 +159,9 @@ public class TestController {
                 Update update = Update.builder()
                         .title(faker.sentence())
                         .description(faker.paragraph())
-                        .proyect(proyect)
+                        .project(project)
                         .createdByUser(owner.getId())
-                        .createdTime(new Date(Calendar.getInstance().getTimeInMillis()))
+                        .createdTime(LocalDateTime.now())
                         .build();
 
                 updates.add(update);

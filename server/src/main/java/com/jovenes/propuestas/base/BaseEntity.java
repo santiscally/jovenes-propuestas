@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -29,13 +30,15 @@ public abstract class BaseEntity {
     protected Integer createdByUser;
 
     @Column(name="created_time", nullable=false)
-    protected Date createdTime;
+    protected LocalDateTime createdTime;
 
     @Column(name="updated_user")
     protected Integer updatedByUser;
 
     @Column(name="updated_time")
-    protected Date updatedTime;
+    protected LocalDateTime updatedTime;
+
+
 
 }
 

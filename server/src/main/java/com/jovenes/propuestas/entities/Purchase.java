@@ -9,6 +9,7 @@ import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -34,5 +35,5 @@ public class Purchase extends BaseEntity {
     int quantity;
 
     @Column(name="delivery_date", nullable=false)
-    private Date deliveryDate;
+    private LocalDateTime deliveryDate;
 }
